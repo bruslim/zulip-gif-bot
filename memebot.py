@@ -18,7 +18,7 @@ finally:
     f.close()
 
 client = zulip.Client(email='meme-bot@students.hackerschool.com',
-                      api_key='groGphX5ByElmMkhuePPSBwB8A2kE8mo')
+                      api_key='bAD KETY')
 
 client.add_subscriptions([{"name": stream_name} for stream_name in ZULIP_STREAMS])
 
