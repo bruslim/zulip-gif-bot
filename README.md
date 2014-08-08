@@ -1,4 +1,4 @@
-zulip-gif-bot
+zulip-meme-bot
 =============
 
-Gif bot for Zulip
+meme bot for Zulip

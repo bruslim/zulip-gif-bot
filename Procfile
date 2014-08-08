@@ -1,1 +1,1 @@
-worker: python gifbot.py
+worker: python memebot.py
