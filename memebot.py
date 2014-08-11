@@ -103,7 +103,7 @@ def send_pm(msg, content):
 def list_all_memes():
   for meme_name in local_memes:
     meme = local_memes[meme_name]
-    yield '[' + meme['name'] + '](' + meme['url'] + ') ' + meme['url']
+    yield '[' + meme['name'] + '](' + meme['url'] + ')'
   
     
 def create_image(image_id, top_text, bottom_text):
