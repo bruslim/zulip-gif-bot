@@ -83,19 +83,14 @@ def respond(msg):
         "content": response_content
     })
   else:
-    client.send_message({
-      "type": msg['type'],
-      "subject": msg['subject'],
-      "to": msg['sender_email'],
-      "content": content
-    })
+    send_pm(msg, response_content)
 
 
 def send_pm(msg, content):
   client.send_message({
     "type": 'private',
     "subject": msg['subject'],
-    "to": msg['sender_email'],
+    "to": json.dumps(msg['sender_email']),
     "content": content
   })
   
