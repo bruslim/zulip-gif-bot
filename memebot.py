@@ -85,12 +85,17 @@ def respond(msg):
   else:
     send_pm(msg, response_content)
 
-
+def get_recipients(msg):
+  for recipient in msg['display_recipient']:
+    yield recipient['email']
+    
 def send_pm(msg, content):
+  recipients = get_recipients(msg)
+  recipients.append(msg['sender_email']) 
   client.send_message({
     "type": 'private',
     "subject": msg['subject'],
-    "to": json.dumps(msg['sender_email']),
+    "to": json.dumps(recipients),
     "content": content
   })
   
