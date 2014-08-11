@@ -29,7 +29,7 @@ last_loaded = datetime.datetime.now()
 def respond(msg):
  
   # If sender email is my email return
-  if msg['sender_email'] == "meme-bot@students.hackerschool.com": #os.environ['ZULIP_USERNAME']:
+  if msg['sender_email'] == os.environ['ZULIP_USERNAME']:
     return
 
   content = msg['content'].split()
@@ -83,7 +83,12 @@ def respond(msg):
         "content": response_content
     })
   else:
-    send_pm(msg, response_content)
+    client.send_message({
+      "type": msg['type'],
+      "subject": msg['subject'],
+      "to": msg['sender_email'],
+      "content": content
+    })
 
 
 def send_pm(msg, content):
@@ -97,7 +102,7 @@ def send_pm(msg, content):
 def list_all_memes():
   for meme_name in local_memes:
     meme = local_memes[meme_name]
-    yield '[' + (meme['name']) + '](' + (meme['url']) + ')'
+    yield '[' + meme['name'] + '](' + meme['url'] + ')'
   
     
 def create_image(image_id, top_text, bottom_text):
@@ -132,18 +137,12 @@ def load_memes():
     local_memes[meme['name'].lower()] = meme
   
   last_loaded = datetime.datetime.now()
-
   
   return len(memes)
 
 
 
 #init the list
-
-
-
-
-
 load_memes()
 
 print('Loaded ' + str( len( local_memes ) ) + ' memes')
