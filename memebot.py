@@ -17,7 +17,7 @@ try:
 finally: 
     f.close()
 
-client = zulip.Client(email=os.environ['ZULIP_USERNAME'],
+client = zulip.Client(email=os.environ['ZULIP_USERNAME'], 
                       api_key=os.environ['ZULIP_API_KEY'])
 
 client.add_subscriptions([{"name": stream_name} for stream_name in ZULIP_STREAMS])
@@ -27,13 +27,13 @@ last_loaded = datetime.datetime.now()
 
 # call respond function when client interacts with gif bot
 def respond(msg):
-
+ 
   # If sender email is my email return
-  if msg['sender_email'] == os.environ['ZULIP_USERNAME']:
+  if msg['sender_email'] == "meme-bot@students.hackerschool.com": #os.environ['ZULIP_USERNAME']:
     return
 
   content = msg['content'].split()
-
+  
   contentStarts = 0;
 
   if ((content[0].upper() == "MEME" and content[1].upper() == "ME")):
@@ -47,12 +47,15 @@ def respond(msg):
   
   # rejoin the strings
   query = (" ".join(content[contentStarts:])).split("|")
+  
+  print query
+  
   response_content = ''
   
   # special !memes for a list of memes 
   if (query[0].strip().lower() == '!memes'):
     all_the_memes = list_all_memes();
-    send_pm(msg,  'List of known memes:\n' + "\n".join(all_the_memes.sort()))
+    send_pm(msg,  'List of known memes:\n' + "\n".join(sorted(all_the_memes)))
     return
   
   # get the meme
@@ -95,10 +98,11 @@ def send_pm(msg, content):
   })
   
 def list_all_memes():
-  temp = []
-  for meme in local_memes:
-    temp.append('[' + meme['name'] + '](' + meme['url'] + ')')
-  return temp
+  for meme_name in local_memes:
+    meme = local_memes[meme_name]
+    print meme
+    yield '[' + (meme['name']) + '](' + (meme['url']) + ')'
+  
     
 def create_image(image_id, top_text, bottom_text):
   response = requests.post("https://api.imgflip.com/caption_image",data={
@@ -136,8 +140,18 @@ def load_memes():
   
   return len(memes)
 
+
+
 #init the list
+
+
+
+
+
 load_memes()
+
+print('Loaded ' + str( len( local_memes ) ) + ' memes')
 
 # This is a blocking call that will run forever
 client.call_on_each_message(lambda msg: respond(msg))
+
