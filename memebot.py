@@ -96,7 +96,7 @@ def send_pm(msg, content):
 def list_all_memes():
   temp = []
   for meme in local_memes:
-    temp.apped( '[' + meme['name'] + '](' + meme['url'] + ')')
+    temp.append( '[' + meme['name'] + '](' + meme['url'] + ')')
   return temp
     
 def create_image(image_id, top_text, bottom_text):
