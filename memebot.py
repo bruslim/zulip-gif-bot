@@ -51,7 +51,8 @@ def respond(msg):
   
   # special !memes for a list of memes 
   if (query[0].strip().lower() == '!memes'):
-    send_pm(msg,  'List of known memes:\n' + "\n".join(sorted(list_all_memes())))
+    all_the_memes = list_all_memes();
+    send_pm(msg,  'List of known memes:\n' + "\n".join(all_the_memes.sort()))
     return
   
   # get the meme
@@ -96,7 +97,7 @@ def send_pm(msg, content):
 def list_all_memes():
   temp = []
   for meme in local_memes:
-    temp.append( '[' + meme['name'] + '](' + meme['url'] + ')')
+    temp.append('[' + meme['name'] + '](' + meme['url'] + ')')
   return temp
     
 def create_image(image_id, top_text, bottom_text):
