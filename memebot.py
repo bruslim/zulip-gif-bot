@@ -51,7 +51,7 @@ def respond(msg):
   
   # special !memes for a list of memes 
   if (query[0].strip().lower() == '!memes'):
-    send_pm(msg,  'List of known memes:\n' + "\n".join(sorted(local_memes)))
+    send_pm(msg,  'List of known memes:\n' + "\n".join(sorted(list_all_memes())))
     return
   
   # get the meme
@@ -92,6 +92,10 @@ def send_pm(msg, content):
     "to": msg['sender_email'],
     "content": content
   })
+  
+def list_all_memes():
+  for meme in memes:
+    yield '[' + meme.name + '](' + meme.url + ')'
     
 def create_image(image_id, top_text, bottom_text):
   response = requests.post("https://api.imgflip.com/caption_image",data={
