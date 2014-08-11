@@ -90,7 +90,7 @@ def get_recipients(msg):
     yield recipient['email']
     
 def send_pm(msg, content):
-  recipients = get_recipients(msg)
+  recipients = list(get_recipients(msg))
   recipients.append(msg['sender_email']) 
   client.send_message({
     "type": 'private',
