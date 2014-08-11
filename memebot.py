@@ -85,10 +85,11 @@ def respond(msg):
   else:
     send_pm(msg, response_content)
 
+# method to get recipients for a group pm
 def get_recipients(msg):
   for recipient in msg['display_recipient']:
     yield recipient['email']
-    
+
 def send_pm(msg, content):
   recipients = list(get_recipients(msg))
   recipients.append(msg['sender_email']) 
@@ -118,16 +119,21 @@ def create_image(image_id, top_text, bottom_text):
     
 def get_meme(name):
   
+  # should we reload the list?
   if ((datetime.datetime.now() - last_loaded) < datetime.timedelta(hours=6)):
     load_memes()
   
+  # normalize it
   upper = name.lower()
   
+  # get it if it exists
   if upper in local_memes:
     return local_memes[upper]
 
+  # return nothing if not
   return None
 
+# load the memes
 def load_memes():
   response = requests.get("https://api.imgflip.com/get_memes").content
   loaded_json = json.loads(response)
@@ -139,7 +145,6 @@ def load_memes():
   last_loaded = datetime.datetime.now()
   
   return len(memes)
-
 
 
 #init the list
