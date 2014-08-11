@@ -47,9 +47,6 @@ def respond(msg):
   
   # rejoin the strings
   query = (" ".join(content[contentStarts:])).split("|")
-  
-  print query
-  
   response_content = ''
   
   # special !memes for a list of memes 
@@ -100,7 +97,6 @@ def send_pm(msg, content):
 def list_all_memes():
   for meme_name in local_memes:
     meme = local_memes[meme_name]
-    print meme
     yield '[' + (meme['name']) + '](' + (meme['url']) + ')'
   
     
