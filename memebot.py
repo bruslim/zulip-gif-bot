@@ -95,7 +95,7 @@ def send_pm(msg, content):
   
 def list_all_memes():
   for meme in memes:
-    yield '[' + meme.name + '](' + meme.url + ')'
+    yield '[' + meme['name'] + '](' + meme['url'] + ')'
     
 def create_image(image_id, top_text, bottom_text):
   response = requests.post("https://api.imgflip.com/caption_image",data={
