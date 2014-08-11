@@ -54,4 +54,4 @@ virtualenv==1.11.6
 wsgiref==0.1.2
 xattr==0.6.4
 zope.interface==3.8.0
-git+git://github.com/zulip/python-zulip.git@2ddd1127506c4e4c91954b8883c592c118552203
+zulip==0.2.4

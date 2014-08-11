@@ -3,7 +3,6 @@
 import zulip
 import json
 import requests
-import random
 import os
 import urllib
 import datetime
