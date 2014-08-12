@@ -115,10 +115,9 @@ def respond(msg):
 
 # method to get recipients for a group pm
 def get_recipients(msg):
-  if (not(isinstance(msg['display_recipient'], list))):
-    return []
-  for recipient in msg['display_recipient']:
-    yield recipient['email']
+  if isinstance(msg['display_recipient'], list):
+    for recipient in msg['display_recipient']:
+      yield recipient['email']
 
 def send_pm(msg, content):
   recipients = list(get_recipients(msg))
