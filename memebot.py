@@ -46,8 +46,13 @@ local_memes = {
   },
   "challenge accepted": {
     "id": 8881419,
-    "name": "challenge accepted",
+    "name": "Challenge Accepted",
     "url": "https://i.imgflip.com/5acy3.jpg"
+  },
+  "derp": {
+    "id":806713,
+    "name":"Derp",
+    "url": "https://i.imgflip.com/hagp.jpg"
   }
 }
 
@@ -60,21 +65,28 @@ def respond(msg):
   if msg['sender_email'] == os.environ['ZULIP_USERNAME']:
     return
 
+  # split the content by 0
   content = msg['content'].split()
   
+  # assume content starts a t 0
   contentStarts = 0;
 
+  # special command
   if ((content[0].upper() == "MEME" and content[1].upper() == "ME")):
     contentStarts = 2
 
+  # handle @meme bot command
   if ((content[0].upper() == "@**MEME" and content[1].upper() == "BOT**" and content[2].upper() == "MEME" and content[3].upper() == "ME")):
     contentStarts = 4
 
+  # no content?
   if (contentStarts <= 0):
     return
   
   # rejoin the strings
   query = (" ".join(content[contentStarts:])).split("|")
+  
+  # set defualt response
   response_content = ''
   
   # special !memes for a list of memes 
@@ -85,16 +97,21 @@ def respond(msg):
   
   # get the meme
   meme = get_meme(query[0].strip());
+  # uknown?
   if (meme is None):
+    #pm error message
     send_pm(msg, create_image(61527, query[0].strip() ,"Y U NO !MEMES") + "\nUnknown Meme: " + query[0])
     return
   else:
-    top = ''
-    bottom = ''
-
+    # if just meme name
     if (len(query) == 1):
       response_content = meme['url']
+      
     else:
+      # init top and bottom text
+      top = ''
+      bottom = ''
+
       if (len(query) > 1): 
         top = query[1].strip()
 
