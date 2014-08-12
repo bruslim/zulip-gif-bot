@@ -22,7 +22,35 @@ client = zulip.Client(email=os.environ['ZULIP_USERNAME'],
 
 client.add_subscriptions([{"name": stream_name} for stream_name in ZULIP_STREAMS])
 
-local_memes = {}
+# meme seeds
+local_memes = {
+  'not bad obama': {
+    'id': 289182,
+    'name': 'Not Bad Obama',
+    'url': 'https://i.imgflip.com/674u.jpg'
+  },
+  "over 9000": {
+    'id': 2525024,
+    'name': 'Over 9000',
+    'url': 'https://i.imgflip.com/1i4bk.jpg'
+  },
+  "me gusta": {
+    'id': 7249133,
+    'name': 'Me Gusta',
+    'url': 'https://i.imgflip.com/4bdgt.jpg'
+  },
+  "table flip guy": {
+    'id': 1380694,
+    'name': "Table Flip Guy",
+    'url': "https://i.imgflip.com/tlcm.jpg"
+  },
+  "challenge accepted": {
+    "id": 8881419,
+    "name": "challenge accepted",
+    "url": "https://i.imgflip.com/5acy3.jpg"
+  }
+}
+
 last_loaded = datetime.datetime.now()
 
 # call respond function when client interacts with gif bot
@@ -87,6 +115,8 @@ def respond(msg):
 
 # method to get recipients for a group pm
 def get_recipients(msg):
+  if (msg['display_recipient'] == None):
+    return []
   for recipient in msg['display_recipient']:
     yield recipient['email']
 
