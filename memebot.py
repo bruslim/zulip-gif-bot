@@ -115,7 +115,7 @@ def respond(msg):
 
 # method to get recipients for a group pm
 def get_recipients(msg):
-  if (!isinstance(msg['display_recipient'], collections.Sequence)):
+  if (!isinstance(msg['display_recipient'], list)):
     return []
   for recipient in msg['display_recipient']:
     yield recipient['email']
