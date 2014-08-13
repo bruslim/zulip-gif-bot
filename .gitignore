@@ -56,3 +56,4 @@ venv
 CONFIG.py
 zulip
 credentials
+runner.sh
