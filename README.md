@@ -3,6 +3,12 @@ zulip-meme-bot
 
 meme bot for Zulip
 
+Hooks into imgflip's API to generate memes.
+
+If you would like to add a meme to the meme_seeds.json file, please issue a pull request!
+
+---------
+
 Generate a meme!
 ~~~~~
 meme me [meme name] | [top text] | [bottom text]
@@ -16,7 +22,7 @@ meme me !memes
 
 Screenshot
 ==========
-![screenshot](https://www.dropbox.com/s/7f0haiqb3pz9lcm/Screenshot%202014-08-15%2011.56.28%20-%20cropped.png)
+![screenshot](http://i58.tinypic.com/2cxjd02.png)
 
 
 License
