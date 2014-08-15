@@ -22,9 +22,6 @@ client.add_subscriptions([{"name": stream_name} for stream_name in ZULIP_STREAMS
 # meme bot
 bot = MemeBot(client)
 
-#init the list
-bot.load_memes()
-
 print('Loaded ' + str( len( bot.local_memes ) ) + ' memes')
 
 # This is a blocking call that will run forever
